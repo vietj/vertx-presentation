@@ -122,7 +122,220 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						##
+						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Generation polyglotte
+						- Les API Vert.x 2 sont écrites à la main
+						- Vert.x 3 génère les API dans chaque language
+						- Maintenance automatique
+						- Les API de la stack entière sont générées
+						- Documentation polyglotte
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Bus d'évènement
+						- Le systeme nerveux de Vert.x
+						- Les verticles échangent des messages grâce au bus
+						- Point à point - pub/sub - requête/réponse
+						- Immuables
+						- JSON, byte[], String, etc...
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## La démo
+						- Un dashboard de monitoring
+						- Les métriques sont aggrégées dans le navigateur
+						- Réactif: basé sur les messages
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Event bus dans le navigateur
+						- Le bus est étendu au client
+						- Même API que sur le serveur
+						- Idéal pour les applications web _temps réel_
+						- Transport par SockJS
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Nouveautés Vert.x 3
+						- L'API Core ne change pas fondamentalement
+						- Supprimer les petites inconvéniences de Vert.x 2
+						- Génération polyglotte
+						- Support de RxJava, RxGrooy, RxJS
+						- Une stack
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Le deployment
+						- Compilation à la volée du source: Java, Groovy, etc...
+						- Trouve les resources en local ou dans un repo Maven
+						- CLI / `main(String[] args)` / Maven / Gradle
+						- Classloader: isolation par classloader optionelle
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## La stack
+						- Vert.x Web
+						- Data: JDBC & NoSQL
+						- Vert.x Unit
+						- Mail Service
+						- Metrics
+						- Reactive: reactive-streams, RxJava, RxGroovy, RxJS
+						- Messaging & Integration: JCA
+						- Cluster
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Vert.x Web
+						-
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## tata
+						- Une libraire pour écrire des applications web modernes et scalable style Express.js / Sinatra
+						- Basé sur Vert.x Core qui fournit une API HTTP
+						- Routing, négociation de contenu, session
+						- Templating: Handlebars, Jade, Thymeleaf, MVEL
+						- Webserver, Event-bus bridge
+						- Sécurité : Authentification, CORS, Authorization
+						- etc…
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Metrics
+						- Vert.x Core fournit une SPI à implémenter
+						- Implementation Dropwizard
+						- NetServer / NetClient
+						- HttpServer / HttpClient
+						- EventBus
+						- Timers
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Cluster & Haute Disponibilité
+						- Event bus distribué
+						- Haute disponibilité d’un Verticle
+						- Hazelcast jusqu’à 2.x
+						- Hazelcast et JGroups pour la 3.0
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Acces aux données
+						- Non bloquant – MongoDB – Redis – Async MySQL/PosgresQL
+						- Bloquant – JDBC
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Reactive style!!!
+						- RxJava – RxGroovy – RxJS
+						- Api RxJava-ifiée comme un langage : toObservable()
+						- Implementation de la spec Reactive-Streams 1.0
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Vert.x Unit
+						- Ecrire des tests asynchrones
+						- Inspiré de Qunit et Junit
+						- JUnit runner ou polyglotte
+						- Reporting Junit XML, console ou event bus
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Vert.x 3.0
+						- Dernierement: milestone4
+						- Encore 2 milestones
+						- La finale le … 22 juin
+						- Ruby, JGroup cluster manager, Work Queue, Redis, Openshift, AMQP, RabbitMQ, InfluxDB???
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Vert.x 3.1
+						- Scala, Clojure, Ceylon, Python
+						- IoT – MQTT, CoAP
+						- Cassandra
+						- HTTP2
+						- Event bus : transport pluglable, encryption, authorization, control de flux
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Conclusion
+						- Polyglotte : le bon langage pour le bon outil
+						- Modèle de concurrence simplifié
+						- Comme tu veux: Gradle/Maven / fatjar / main / etc…
+						- Où tu veux : eventbus distribué ou non !!!
+						- Microwhat ??? Buzzword compliant
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Q & A
 					</script>
 				</section>
 
