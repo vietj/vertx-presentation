@@ -50,7 +50,7 @@
 						- Projet open source sous licenses Apache et Eclipse
 						- Projet de la fondatation Eclipse
 						- Indépendant - ASL/EPL
-						- Vert.x 3.1.x version courante
+						- Vert.x 3.1 version courante
 					</script>
 				</section>
 
@@ -66,17 +66,66 @@
 						- Simple mais non simpliste, flexible sans dogmes
 						- Léger et embarquable
 						- Cluster / failover
+						- Microservice friendly
 					</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
+						## Vert.x 3.0
+						- Java 8
+						- Génération polyglotte
+						- Vert.x Web
+						- Data access
+						- Auth
+						- Metrics
+						- Reactive Extensions
+						- Vert.x Unit
+						- etc...
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Vert.x 3.1
+						- Vert.x Sync
+						- STOMP
+						- Vert.x Shell
+						- Redeploy
+						- Génération de proxy JS
+						- Extensions CLI
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Vert.x 3.2
+						- AMQP
+						- OAuth support
+						- Ceylon
+						- Hawkular Metrics
+						- JGroups cluster manager
+						- HTTP2 (?)
+					</script>
+				</section>
+
+				<section>
+					<h2>La démo</h2>
+					<ul>
+						<li>Dashboard de monitoring</li>
+						<li>Réactif: basé sur les messages</li>
+					</ul>
+					<img data-src="assets/dashboard.png">
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
 						## Asynchrone
-						- callback / évènements
+						- Callback / évènements
 						- Principe de l'event loop
 						- Les serveurs modernes doivent pouvoir gérer un concurrence élevée: serveur web, websockets, IoT, etc...
 						- Les threads sont encore une resource importante
-						- Besoin de servir beaucoup de connection avec peu de cores
+						- Besoin de servir beaucoup de connections avec peu de cores
 						- Un thread bloqué ne peut rien faire d'autre
 					</script>
 				</section>
@@ -108,6 +157,16 @@
 					<img data-src="assets/shim-groovy.png">
 					<img data-src="assets/shim-ruby.png">
 					<img data-src="assets/shim-ceylon.png">
+					<p>Génération polyglotte d'api</p>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## I/O
+						- API simple d'utilisation basée sur Netty 4
+						- Stream gérant le back pressure / control flow
+						- TCP/HTTP/Websockets
+					</script>
 				</section>
 
 				<section data-markdown>
@@ -115,7 +174,6 @@
 						## Verticle
 						- Le composant déployé dans Vert.x
 						- Dans n'importe quel language
-						- Un seul thread
 						- Les verticles communiquent par messages
 						- Embarqué ou depuis la ligne de commande
 						- Déployé dans des jars
@@ -124,19 +182,81 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						# DEMO
+						## Le deployment
+						- Compilation à la volée du source: Java, Groovy, etc...
+						- Trouve les resources en local ou dans un repo Maven
+						- CLI / `main(String[] args)` / Maven / Gradle
+						- Classloader: isolation par classloader optionelle
 					</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
-						## Generation polyglotte
-						- Les API Vert.x 2 sont écrites à la main
-						- Vert.x 3 génère les API dans chaque language
-						- Maintenance automatique
-						- Les API de la stack entière sont générées
-						- Documentation polyglotte
+						## Reactor pattern
+						- Traitement des IO sous forme d'evenements
+						- Le _même_ thread dispatche
+						    - Les évènements IO
+						    - Les timers
+						    - Les messages de l'event bus
+						    - etc...
+						- Concurrence simplifiée: _monothreadé_
+						- Celui par défault
 					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Reactor pattern
+						- Scalable
+						- Minimize le context switch du CPU
+						- Cache friendly
+						- Callback hell
+						- Ne _jamais_ bloquer
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Workers
+						- Permet de bloquer pour utiliser une API bloquante : JDBC, etc...
+						- En gros un thread pool
+						- Worker `Verticle` encapsule l'opération bloquante
+					</script>
+				</section>
+
+				<section>
+					<h3>Event loop Verticle</h3>
+					<pre><code data-trim contenteditable>
+vertx.eventBus().send("abc", "Give me something", reply -> {
+   // Event loop thread
+  System.out.println("Result is " + reply.body());
+});
+					</code></pre>
+					<h3>Worker Verticle</h3>
+					<pre><code data-trim contenteditable>
+public void start() {
+  vertx.eventBus().consumer("abc", msg -> {
+    // Worker thread
+    String result = service.doBlockingLongComputation();
+    msg.reply(result);
+  });
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Ou modèle hybride</h2>
+					<pre><code data-trim contenteditable>
+// Event loop thread
+vertx.executeBlocking(fut -> {
+  // Worker thread
+  String result = service.doBlockingLongComputation();
+  fut.complete(result);
+}, result -> {
+  // Event loop thread
+  System.out.println("Result is " + fut.result());
+});
+					</code></pre>
 				</section>
 
 				<section data-markdown>
@@ -147,21 +267,7 @@
 						- Point à point - pub/sub - requête/réponse
 						- Immuables
 						- JSON, byte[], String, etc...
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## La démo
-						- Un dashboard de monitoring
-						- Les métriques sont aggrégées dans le navigateur
-						- Réactif: basé sur les messages
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						# DEMO
+						- Bridges SockJS / TCP / AMQP
 					</script>
 				</section>
 
@@ -183,22 +289,17 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						## Nouveautés Vert.x 3
-						- L'API Core ne change pas fondamentalement
-						- Supprimer les petites inconvéniences de Vert.x 2
-						- Génération polyglotte
-						- Support de RxJava, RxGrooy, RxJS
-						- Une stack
+						## Cluster & Haute Disponibilité
+						- Event bus distribué
+						- Haute disponibilité d’un Verticle
+						- Hazelcast jusqu’à 2.x
+						- Hazelcast et JGroups pour la 3.0
 					</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
-						## Le deployment
-						- Compilation à la volée du source: Java, Groovy, etc...
-						- Trouve les resources en local ou dans un repo Maven
-						- CLI / `main(String[] args)` / Maven / Gradle
-						- Classloader: isolation par classloader optionelle
+						# DEMO
 					</script>
 				</section>
 
@@ -219,15 +320,7 @@
 				<section data-markdown>
 					<script type="text/template">
 						## Vert.x Web
-						-
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## tata
 						- Une libraire pour écrire des applications web modernes et scalable style Express.js / Sinatra
-						- Basé sur Vert.x Core qui fournit une API HTTP
 						- Routing, négociation de contenu, session
 						- Templating: Handlebars, Jade, Thymeleaf, MVEL
 						- Webserver, Event-bus bridge
@@ -239,28 +332,12 @@
 				<section data-markdown>
 					<script type="text/template">
 						## Metrics
-						- Vert.x Core fournit une SPI à implémenter
-						- Implementation Dropwizard
+						- Vert.x Core
+						- Implementation Dropwizard / Hawkular
 						- NetServer / NetClient
 						- HttpServer / HttpClient
 						- EventBus
 						- Timers
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Cluster & Haute Disponibilité
-						- Event bus distribué
-						- Haute disponibilité d’un Verticle
-						- Hazelcast jusqu’à 2.x
-						- Hazelcast et JGroups pour la 3.0
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						# DEMO
 					</script>
 				</section>
 
@@ -274,7 +351,7 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						## Reactive style!!!
+						## Reactive
 						- RxJava – RxGroovy – RxJS
 						- Api RxJava-ifiée comme un langage : toObservable()
 						- Implementation de la spec Reactive-Streams 1.0
@@ -300,27 +377,6 @@
 				<section data-markdown>
 					<script type="text/template">
 						# DEMO
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Vert.x 3.0
-						- Dernierement: milestone4
-						- Encore 2 milestones
-						- La finale le … 22 juin
-						- Ruby, JGroup cluster manager, Work Queue, Redis, Openshift, AMQP, RabbitMQ, InfluxDB???
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Vert.x 3.1
-						- Scala, Clojure, Ceylon, Python
-						- IoT – MQTT, CoAP
-						- Cassandra
-						- HTTP2
-						- Event bus : transport pluglable, encryption, authorization, control de flux
 					</script>
 				</section>
 
