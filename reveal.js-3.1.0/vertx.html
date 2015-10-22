@@ -81,6 +81,7 @@
 						- Metrics
 						- Reactive Extensions
 						- Vert.x Unit
+						- Mail service
 						- etc...
 					</script>
 				</section>
@@ -107,15 +108,6 @@
 						- JGroups cluster manager
 						- HTTP2 (?)
 					</script>
-				</section>
-
-				<section>
-					<h2>La démo</h2>
-					<ul>
-						<li>Dashboard de monitoring</li>
-						<li>Réactif: basé sur les messages</li>
-					</ul>
-					<img data-src="assets/dashboard.png">
 				</section>
 
 				<section data-markdown>
@@ -271,6 +263,33 @@ vertx.executeBlocking(fut -> {
 					</script>
 				</section>
 
+				<section>
+					<h2>La démo</h2>
+					<ul>
+						<li>Dashboard de monitoring</li>
+						<li>Réactif - basé sur les messages</li>
+					</ul>
+					<img data-src="assets/dashboard.png">
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Vert.x Web
+						- Une libraire pour écrire des applications web modernes et scalable style Express.js / Sinatra
+						- Routing, négociation de contenu, session
+						- Templating: Handlebars, Jade, Thymeleaf, MVEL
+						- Webserver, Event-bus bridge
+						- Sécurité : Authentification, CORS, Authorization
+						- etc…
+					</script>
+				</section>
+
 				<section data-markdown>
 					<script type="text/template">
 						## Event bus dans le navigateur
@@ -284,6 +303,44 @@ vertx.executeBlocking(fut -> {
 				<section data-markdown>
 					<script type="text/template">
 						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Acces aux données
+						- Non bloquant – MongoDB – Redis – Async MySQL/PosgresQL
+						- Bloquant – JDBC
+						- API d'accès à la DB
+						- Pas un ORM
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Security
+						- Shiro : LDAP & `.properties`
+						- JDBC / Mongo
+						- JWT authorization
+						- ...
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Metrics
+						- Vert.x Core
+						- Implementation Dropwizard / Hawkular (3.2)
+						- NetServer / NetClient
+						- HttpServer / HttpClient
+						- EventBus
+						- Timers
 					</script>
 				</section>
 
@@ -305,52 +362,6 @@ vertx.executeBlocking(fut -> {
 
 				<section data-markdown>
 					<script type="text/template">
-						## La stack
-						- Vert.x Web
-						- Data: JDBC & NoSQL
-						- Vert.x Unit
-						- Mail Service
-						- Metrics
-						- Reactive: reactive-streams, RxJava, RxGroovy, RxJS
-						- Messaging & Integration: JCA
-						- Cluster
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Vert.x Web
-						- Une libraire pour écrire des applications web modernes et scalable style Express.js / Sinatra
-						- Routing, négociation de contenu, session
-						- Templating: Handlebars, Jade, Thymeleaf, MVEL
-						- Webserver, Event-bus bridge
-						- Sécurité : Authentification, CORS, Authorization
-						- etc…
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Metrics
-						- Vert.x Core
-						- Implementation Dropwizard / Hawkular
-						- NetServer / NetClient
-						- HttpServer / HttpClient
-						- EventBus
-						- Timers
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Acces aux données
-						- Non bloquant – MongoDB – Redis – Async MySQL/PosgresQL
-						- Bloquant – JDBC
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
 						## Reactive
 						- RxJava – RxGroovy – RxJS
 						- Api RxJava-ifiée comme un langage : toObservable()
@@ -365,7 +376,7 @@ vertx.executeBlocking(fut -> {
 				</section>
 
 				<section>
-					<h2>What's wrong ?</h2>
+					<h2>What's the catch?</h2>
 					<pre><code data-trim contenteditable>
 @Before
 public void setUp() {
@@ -407,6 +418,12 @@ public void testServer() {
 						- Interagir avec Vert.x
 						- Extensible
 						- SSH / Telnet
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# DEMO
 					</script>
 				</section>
 
@@ -717,7 +734,7 @@ function linkify( selector ) {
 				<section>
 					<h2>Export to PDF</h2>
 					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+					<!--<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>-->
 				</section>
 
 				<section>
