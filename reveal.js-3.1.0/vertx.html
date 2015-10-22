@@ -360,8 +360,29 @@ vertx.executeBlocking(fut -> {
 
 				<section data-markdown>
 					<script type="text/template">
-						# DEMO
+						# Testing
 					</script>
+				</section>
+
+				<section>
+					<h2>What's wrong ?</h2>
+					<pre><code data-trim contenteditable>
+@Before
+public void setUp() {
+  vertx = Vertx.vertx();
+  vertx.createHttpServer().requestHandler(req -> {
+    req.response().setStatus(200).end();
+  }).listen(8080);
+}
+
+@Test
+public void testServer() {
+  HttpClient client = vertx.createHttpClient();
+  client.getNow(getNow(8080, "localhost", "/", resp -> {
+    assertEquals(200, resp.statusCode();
+  });
+}
+					</code></pre>
 				</section>
 
 				<section data-markdown>
@@ -377,6 +398,15 @@ vertx.executeBlocking(fut -> {
 				<section data-markdown>
 					<script type="text/template">
 						# DEMO
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Vert.x Shell
+						- Interagir avec Vert.x
+						- Extensible
+						- SSH / Telnet
 					</script>
 				</section>
 
