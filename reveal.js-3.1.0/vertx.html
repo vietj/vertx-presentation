@@ -101,6 +101,7 @@
 				<section data-markdown>
 					<script type="text/template">
 						## Vert.x 3.2
+						- Fin novembre 2015
 						- AMQP
 						- OAuth support
 						- Ceylon
@@ -113,12 +114,11 @@
 				<section data-markdown>
 					<script type="text/template">
 						## Asynchrone
-						- Callback / évènements
-						- Principe de l'event loop
 						- Les serveurs modernes doivent pouvoir gérer un concurrence élevée: serveur web, websockets, IoT, etc...
 						- Les threads sont encore une resource importante
 						- Besoin de servir beaucoup de connections avec peu de cores
 						- Un thread bloqué ne peut rien faire d'autre
+						- Callback / évènements
 					</script>
 				</section>
 
@@ -126,14 +126,21 @@
 					<script type="text/template">
 						## API Core asynchrone
 						- Core léger, peu de dépendances
-						- Clients et serveurs TCP/SSL
-						- Clients et serveurs HTTP/HTTPS
-						- Websocket, SockJS
+						- Clients / serveurs / datagrammes
 						- Systeme de fichier
 						- Bus d'évènements
-						- DNS
-						- UDP
 						- Données distribuées
+						- DNS
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## I/O
+						- API simple d'utilisation basée sur Netty 4
+						- TCP/HTTP/Websockets
+						- UDP
+						- Contrôle de flux / _back pressure_
 					</script>
 				</section>
 
@@ -150,15 +157,6 @@
 					<img data-src="assets/shim-ruby.png">
 					<img data-src="assets/shim-ceylon.png">
 					<p>Génération polyglotte d'api</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## I/O
-						- API simple d'utilisation basée sur Netty 4
-						- Stream gérant le back pressure / control flow
-						- TCP/HTTP/Websockets
-					</script>
 				</section>
 
 				<section data-markdown>
@@ -201,8 +199,9 @@
 						## Reactor pattern
 						- Scalable
 						- Minimize le context switch du CPU
+						- Moins de locking
 						- Cache friendly
-						- Callback hell
+						- Attention au callback hell
 						- Ne _jamais_ bloquer
 					</script>
 				</section>
@@ -249,6 +248,15 @@ vertx.executeBlocking(fut -> {
   System.out.println("Result is " + fut.result());
 });
 					</code></pre>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Multi reactor
+						- Plusieurs event loops
+						- Round robin dispatch des connections
+						- Démarrer plusieurs instances du même verticle
+					</script>
 				</section>
 
 				<section data-markdown>
